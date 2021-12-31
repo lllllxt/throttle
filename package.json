@@ -1,25 +1,36 @@
 {
   "name": "@lllllxt/throttle",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "节流函数",
   "main": "throttle.min.js",
+  "typings": "types/index.d.ts",
   "scripts": {
-    "start": "npm run build && npm run uglify",
+    "start": "npm run declaration && npm run build && npm run uglify",
     "build": "rollup -c build/rollup.config.js -o throttle.js",
-    "uglify": "rollup -c build/rollup.config.js -o throttle.min.js --uglify"
+    "uglify": "rollup -c build/rollup.config.js -o throttle.min.js --uglify",
+    "declaration": "tsc"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lllllxt/throttle.git"
+  },
+  "author": "lllllxt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lllllxt/throttle/issues"
+  },
+  "homepage": "https://github.com/lllllxt/throttle#readme",
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "rollup": "^1.32.1",
     "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-uglify": "^6.0.4"
+    "rollup-plugin-uglify": "^6.0.4",
+    "typescript": "^4.5.4"
   },
   "files": [
-    "types/",
+    "types",
     "throttle.js",
     "throttle.min.js"
   ]

@@ -1,3 +1,4 @@
+/* @lllllxt/debounce version 1.0.2, follow me on Github! @lllllxt */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
