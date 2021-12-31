@@ -1,29 +1,33 @@
 /**
- * 节流函数
- * 在防抖函数的基础上 [每n毫秒] 执行一次fn
+ * 节流函数  api用法和 Loadsh.throttle 一样
  * @description 在[wait]毫秒内只执行一次fn的方法
- * @param fn {Function}   实际要执行的函数
- * @param wait {Number}  需要节流的毫秒
- * @param least {Number}  节流时间，单位毫秒（ms）
- *
- * @return {Function}
+ * @param  {Function} fn 要节流的函数
+ * @param  {number} wait 需要节流的毫秒数
+ * @param  {Options} option 选项
+ * @param  {boolean} option.leading 是否在节流开始前调用
+ * @param  {boolean} option.trailing 是否在节流结束后调用
+ * @returns {Function}
  */
-function throttle(fn: () => void, wait: number = 500, least: number = 1000) {
+function throttle(fn: Function, wait: number = 500, option: any = {}): Function {
   let timer: any = null;
-  let lastTime: number = +new Date();
+  let lastTime: number = option?.leading !== false ? 0 : +new Date(); // 节流期间上次调用fn的时间
+  let inTime: any = null; // 每次开始进行节流的时间, 节流结束时置null
   return function () {
     const context = this;
     const args = arguments;
     const now: number = +new Date();
-    clearTimeout(timer);
-    if (now - lastTime > least) {
+    if (!inTime) lastTime = option?.leading !== false ? 0 : now;
+
+    inTime = inTime || now;
+    if (now - lastTime > wait) {
       fn.apply(context, args);
       lastTime = now;
-    } else {
-      timer = setTimeout(function () {
-        fn.apply(context, args);
-      }, wait);
     }
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      option?.trailing !== false && fn.apply(context, args); // 结束后[wait]毫秒调用
+      timer = inTime = null;
+    }, wait);
   };
 }
 

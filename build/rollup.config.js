@@ -9,7 +9,7 @@ export default {
       file: "throttle.js",
       format: "umd",
       name: "throttle",
-      banner: "/* @lllllxt/debounce version " + info.version + ", follow me on Github! @lllllxt */",
+      banner: "/* @lllllxt/throttle version " + info.version + ", follow me on Github! @lllllxt */",
     },
   ],
   plugins: [
